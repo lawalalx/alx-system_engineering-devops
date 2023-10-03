@@ -1,2 +1,2 @@
-#!/bin/bssh
+#!/bin/bash
 echo "Hello, World"
