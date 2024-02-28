@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Write a Bash script that displays:
+# The content of the current directory
+# In a list format
+# Where only the part of the name after the first dash is displayed (refer to the example)
+# Requirements:
+# You must use the for loop (while and until are forbidden)
+# Do not display hidden files
+for file in *; do
+    # Check if the file is not hidden and contains a dash in the name
+    if [ ! -f "$file" ] || [[ "$file" == .* ]] || [[ ! "$file" =~ - ]]; then
+        continue
+    fi
+
+    # Extract the part of the name after the first dash
+    name=$(echo "$file" | cut -d'-' -f2-)
+    
+    # Print the extracted name
+    echo "$name"
+done
