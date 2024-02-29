@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Display listening TCP and UDP ports with associated program name and PID
+netstat -tuln | awk '$NF ~ /^[0-9]+/ {print $0}' | awk '{print $1, $4, $7}' | \
+awk 'NR > 2 {print $1, $4, $5}' | sed 's/://g' | \
+while read -r proto local foreign; do
+    pid=$(echo "$foreign" | awk -F '/' '{print $1}')
+    program=$(echo "$foreign" | awk -F '/' '{print $2}')
+    echo "$proto $local $foreign $pid/$program"
+done
